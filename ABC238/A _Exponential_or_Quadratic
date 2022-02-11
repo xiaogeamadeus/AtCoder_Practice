@@ -1,0 +1,33 @@
+Time Limit: 2 sec / Memory Limit: 1024 MB
+
+Score : 100 points
+
+Problem Statement
+Does 2^n > n^2 hold?
+
+Constraints
+n is an integer between 1 and 10^9
+
+
+
+
+import java.util.*;
+
+public class A_238{
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        int n = input.nextInt();
+        if (Math.pow(2,n) > n*n) {
+            System.out.println("Yes");;
+        }
+        else{
+            System.out.println("No");
+        }
+    }
+}
+
+
+挺简单的就是弄不明白我该怎么让他AC
+哦明白了 main就行了
+
+
