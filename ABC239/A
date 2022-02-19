@@ -1,1 +1,16 @@
+Assuming that the horizon seen from a place x meters above the ground is  
+sqrt x(12800000+x)
+​
+  meters away, find how many meters away the horizon seen from a place H meters above the ground is.
 
+----------------------------------------------------------------------
+import java.util.*;
+ 
+public class Main {
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        double horizon = input.nextDouble();
+        double res = Math.sqrt(horizon * (12800000 + horizon));
+        System.out.println(res);
+    }
+}
