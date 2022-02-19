@@ -1,0 +1,24 @@
+You are given an integer N. If N is between −2^31 and 2^31 −1 (inclusive), print Yes; otherwise, print No.
+−2^63 ≤ N < 2^63
+N is an integer.
+--------------------------------------------------------------
+
+import java.util.*;
+
+public class ABC237_A {
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        long n = input.nextLong();
+        if (n <= Integer.MAX_VALUE && n >= Integer.MIN_VALUE){
+            System.out.println("Yes");
+        }
+        else {System.out.println("No");
+        }
+    }
+}
+
+easy
+注意 输出结果记得大写
+
+注意nextint/nextlong
+注意活用MAX_VALUE
