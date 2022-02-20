@@ -1,0 +1,16 @@
+In the figure shown in the image below, are the points numbered a and b directly connected by a line segment?
+
+import java.util.*;
+
+public class ABC240_A {
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        int a = input.nextInt();
+        int b = input.nextInt();
+        if (a == 1 && b == 10) System.out.println("Yes");
+        else if(b - a == 1){
+            System.out.println("Yes");
+        }
+        else System.out.println("No");
+    }
+}
