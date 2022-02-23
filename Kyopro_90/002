@@ -21,6 +21,48 @@ S,T が正しいカッコ列であるとき、文字列 S+T は正しいカッ�
 また、 ( の方が ) よりも辞書順で早いものとします。
 ----------------------------------------------------------------
 
-括号判断问题，经典问题，用堆栈判断。
+括号判断问题，经典问题，用堆栈判断（本题不需要堆栈，简单的用一个+1—1就可以判断，因为只有一种括号）。
 写case可以用dfs
 
+import java.util.*;
+
+public class kyopro_002 {
+    public static boolean judge(String s){
+        int temp = 0;
+        for(int i = 0; i < s.length(); i++){
+            if(s.charAt(i) == '(') temp++;
+            else if(s.charAt(i) == ')') temp--;
+        if(temp < 0) return false;
+        }
+        if(temp == 0) return true;
+        else return false;
+
+    }
+
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        int N = input.nextInt();
+        input.close();
+
+        if( N % 2 != 0) return;
+
+        for(int i =0; i < (1 << N); i++){
+            String res = "";
+            for(int j = N - 1; j >= 0; j--){
+                if((i & (1 << j)) == 0){
+                    res += "(";
+                }
+                else{
+                    res += ")";
+                }
+            }
+            if(judge(res)){
+                System.out.println(res);
+            }
+
+        }
+    }
+}
+
+
+值得学习的点，
