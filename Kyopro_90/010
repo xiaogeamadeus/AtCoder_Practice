@@ -1,0 +1,129 @@
+ABC 大学には N 人の一年生が在籍しています。クラスは 2 つあり、学籍番号 i 番の生徒のクラスは Ci 組です。今日は期末試験が返却され、学籍番号 i 番の生徒の点数は P i 点でした。
+
+以下の形式の質問が Q 個与えられます。j=1,2,…,Q それぞれについて答えてください。
+
+学籍番号 Lj∼Rj 番の 1 組生徒における、期末試験点数の合計
+学籍番号 Lj∼Rj 番の 2 組生徒における、期末試験点数の合計
+これら 2 つの値をそれぞれ求めよ。
+---------------------------------------------------------------------------------------
+泻药 又超时了。
+麻了，思路应该对的。
+双循环 判断每轮是1班加sum1 是2班加sum2
+看来思路有问题，这道题我用的思路是暴力，时间复杂度应该是O（Q*N） 重复算了很多次加 如果用累计和的话只需要算一轮加就可以了。
+
+算法：累计和
+
+import java.util.*;
+
+public class Kyopro_010 {
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        int N = input.nextInt();
+        int[][] C = new int[N][2];
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < 2; j++){
+                C[i][j] = input.nextInt();
+            }
+        }
+        int Q = input.nextInt();;
+        int[][] L = new int[Q][2];
+        for(int i = 0; i < Q; i++){
+            for(int j = 0; j < 2; j++){
+                L[i][j] = input.nextInt();
+            }
+        }
+
+        int[] sum1 = new int[Q];
+        int[] sum2 = new int[Q];
+        int[][] res = new int[Q][2];
+        int k = 0;
+        for(int j = 0; j < Q; j++){
+            for(int i = L[j][0] - 1; i < L[j][1]; i++){
+                if(C[i][0] == 1){
+                    sum1[k] += C[i][1];
+                }
+                else{
+                    sum2[k] += C[i][1];
+                }
+            }
+            k++;
+            res[j][0] = sum1[j];
+            res[j][1] = sum2[j];
+        }
+
+
+        for(int i = 0; i < Q; i++){
+            for(int j = 0; j < 2; j++){
+                System.out.print(res[i][j] + " ");
+            }
+            System.out.print("\n");
+        }
+    }
+}
+
+
+看看金牌思路。
+
+
+累积和 yyds！
+上一轮重复多次算了求和，这次只算一轮求和，然后之后的求和全部由相减等到，非常轻松。
+
+import java.util.*;
+
+public class Kyopro_010 {
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        int N = input.nextInt();
+        int[][] C = new int[N][2];
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < 2; j++){
+                C[i][j] = input.nextInt();
+            }
+        }
+        int Q = input.nextInt();;
+        int[][] L = new int[Q][2];
+        for(int i = 0; i < Q; i++){
+            for(int j = 0; j < 2; j++){
+                L[i][j] = input.nextInt();
+            }
+        }
+
+        int[] sum1 = new int[N + 1];
+        int[] sum2 = new int[N + 1];
+        sum1[0] = sum1[1] = 0;
+        sum2[0] = sum2[1] = 0;
+        int sumA = 0;
+        int sumB = 0;
+        for(int i = 1; i <= N; i++){
+            if(C[i - 1][0] == 1) {
+                sumA += C[i - 1][1];
+            }
+            else {
+                sumB += C[i - 1][1];
+            }
+            sum1[i] = sumA;
+            sum2[i] = sumB;
+        }
+
+        int[][] res = new int[Q][2];
+        for(int i = 0; i < Q; i++){
+            if(L[i][0] == 1) {
+                res[i][0] = sum1[L[i][1] - 1];
+                res[i][1] = sum2[L[i][1] - 1];
+            }
+            res[i][0] = sum1[L[i][1]] - sum1[L[i][0] - 1];
+            res[i][1] = sum2[L[i][1]] - sum2[L[i][0] - 1];
+        }
+
+        for(int i = 0; i < Q; i++){
+            for(int j = 0; j < 2; j++){
+                System.out.print(res[i][j] + " ");
+            }
+            System.out.print("\n");
+        }
+    }
+}
+
+累積和、ゲットだぜ！
+
+
