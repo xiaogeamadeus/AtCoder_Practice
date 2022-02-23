@@ -1,0 +1,65 @@
+H 行 W 列のマス目があります。上から i (1≤i≤H) 行目、左から j (1≤j≤W) 列目にあるマス (i,j) には、整数 Ai,j が書かれています。 
+すべてのマス (i,j) (1≤i≤H,1≤j≤W) について、以下の値を求めてください。
+マス (i,j) と同じ行または同じ列にあるマス（自分自身を含む）に書かれている整数をすべて合計した値
+
+----------------------------------------------------------------------------
+自己的思路：
+计算每一行的和 每一列的和 然后Bi,j就等于行+列-自己。
+
+import java.util.*;
+
+public class Kyopro_004 {
+
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        int H = input.nextInt();
+        int W = input.nextInt();
+        int[][] A = new int[H][W];
+        for(int i = 0; i < H; i++){
+            for(int j = 0; j < W; j++){
+                A[i][j] = input.nextInt();
+            }
+        }
+
+        int sum = 0;
+        int[] sumH = new int[H];
+        for(int i = 0; i < H; i++) {
+            sum = 0;
+            for (int j = 0; j < W; j++) {
+                sum += A[i][j];
+            }
+            sumH[i] = sum;
+        }
+
+        int[] sumW = new int[W];
+        for(int j = 0; j < W; j++) {
+            sum = 0;
+            for (int i = 0; i < H; i++) {
+                sum += A[i][j];
+            }
+            sumW[j] = sum;
+        }
+
+        int[][] B = new int[H][W];
+        for(int i = 0; i < H; i++){
+            for(int j = 0; j < W; j++){
+                B[i][j] = sumH[i] + sumW[j] - A[i][j];
+            }
+        }
+
+        for(int i = 0; i < H; i++){
+            for(int j = 0; j < W; j++){
+                System.out.print(B[i][j] + " ");
+            }
+            System.out.print("\n");
+        }
+    }
+}
+
+有两个case超时，证明O(n^2)时间复杂度不行。
+看看AC的方案。
+
+没有更好的时间复杂度方法了，貌似就是单纯的因为代码质量问题，目前没有找到很好的解决方案。
+先这样吧
+
+
