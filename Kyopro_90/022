@@ -1,0 +1,65 @@
+幅 A、奥行き B、高さ C の直方体の形をしたケーキがあります。
+あなたはケーキに対して、次の操作を行うことができます。
+
+ある面に平行な方向に切断する
+ただし、ケーキは動かしてはならない（複数のケーキに分割されている場合、これらを変形したり、別々に切ることはできない）
+最小何回の操作で、全てのピースを立方体にすることができますか？
+
+-----------------------------------------------------
+思路是三个数的最大公约数。
+辗转相除法（阿基米德）
+先求两个较小的，然后算公约数与最大的
+
+
+import java.util.Scanner;
+
+public class Kyopro_022 {
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        long a = input.nextLong();
+        long b = input.nextLong();
+        long c = input.nextLong();
+        long t;
+        long temp ;
+        long gcd = 0;
+        long res = 0;
+        long a1 = 0, b1 = 0, c1 = 0;
+        if(a < b && b >= c) {
+            t = a;
+            a = b;
+            b = t;
+        }
+        else if(c >= b && c > a){
+            t = a;
+            a = c;
+            c = t;
+        }
+        if(b > c){
+                temp = gcd(b, c);
+        }
+        else{
+                temp = gcd(c, b);
+        }
+        gcd = gcd(a, temp);
+        if(gcd != a) a1 = a / gcd - 1;
+        if(gcd != b) b1 = b / gcd - 1;
+        if(gcd != c) c1 = c / gcd - 1;
+
+        res = a1 + b1 + c1;
+
+        System.out.print(res);
+    }
+    public static long gcd(long a, long b){
+        if(a % b == 0) return b;
+        else {
+            long temp = a % b;
+            return gcd(b, temp);
+        }
+    }
+}
+
+看一下金牌思路
+
+大致差不多 大数取余还是没弄明白 c++貌似可以直接引用gcd
+
+
