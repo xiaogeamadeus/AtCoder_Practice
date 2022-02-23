@@ -1,0 +1,39 @@
+長さ N の正整数列 A=(A1,A2,…,AN) および B=(B1,B2,…,BN) が与えられます。
+次の操作をちょうど K 回行うことで A を B に一致させることができるか判定してください。
+操作：1 ≤ i ≤ N を満たす i をひとつ選び Ai を Ai−1 または Ai+1 に置き換える
+-----------------------------------------------------------------
+思路 纯数学。K应该是等于两个数列每一项的差的和 或者与差的和所差的数能被2所整除。
+
+import java.util.*;
+
+public class Kyopro_024 {
+    public static void main(String[] args){
+
+        Scanner input = new Scanner(System.in);
+        int N = input.nextInt();
+        int K = input.nextInt();
+        int[] A = new int[N];
+        int[] B = new int[N];
+        for(int i = 0; i < N; i++){
+            A[i] = input.nextInt();
+        }
+        for(int i = 0; i < N; i++){
+            B[i] = input.nextInt();
+        }
+        input.close();
+
+        int sum = 0;
+        for(int i = 0; i < N; i++){
+            sum += Math.abs(A[i]-B[i]);
+        }
+
+        if(K < sum) System.out.println("No");
+        else if(K == sum) System.out.println("Yes");
+        else if((sum - K) % 2 == 0) System.out.println("Yes");
+        else System.out.println("No");
+    }
+}
+
+看一下金牌思路
+
+思路相同 牛牛
