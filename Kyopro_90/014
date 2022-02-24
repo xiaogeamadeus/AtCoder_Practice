@@ -1,0 +1,39 @@
+AGC 街道には N 人の小学生が住んでおり、小学生 i (1≤i≤N) の家は位置 Ai にあります。
+また、小学校は N 校建てられており、小学校 j (1≤j≤N) は位置 Bj にあります。
+AGC 街道に住む小学生は性格が悪く、どの人同士も険悪な関係になっているため、全員が別の学校に通うようにしたいです。
+また、不便さは次のように定義されます。
+小学生 i にとっての家から学校までの距離を Ei とするとき、不便さは距離の総和、すなわち E1 +E2 +...+EN である。
+ただし、位置 u から位置 v までの距離は ∣u−v∣
+どの生徒も別の学校に通うという条件下における、不便さとして考えられる最小値を求めてください。
+----------------------------------------------------------------------
+
+题没看懂差点出问题....
+如果每个小学生都要安排到不同的学校，且加起来的差值最小的话，其实只要先把两个队列排序，然后把它们安排到对应的就可以了 那就是最小值。
+
+import java.util.*;
+
+public class Kyopro_014 {
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        int N = input.nextInt();
+        int[] A = new int[N];
+        int[] B = new int[N];
+
+        for(int i = 0; i < N; i++){
+            A[i] = input.nextInt();
+        }
+        for(int i = 0; i < N; i++){
+            B[i] = input.nextInt();
+        }
+        input.close();
+
+        Arrays.sort(A);
+        Arrays.sort(B);
+
+        long res = 0;
+        for(int i = 0; i < N; i++){
+            res += Math.abs(A[i] - B[i]);
+        }
+        System.out.println(res);
+    }
+}
