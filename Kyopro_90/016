@@ -1,0 +1,35 @@
+A 円硬貨、B 円硬貨、C 円硬貨をそれぞれ 0 枚以上使ってちょうど N 円を支払うとき、使う硬貨の枚数として考えられる最小値を求めてください。
+
+ただし、それぞれの硬貨は無数にあるものとします。
+--------------------------------------------------------------------------------------------
+思路：本来考虑的是钱可以超 后来发现是正常买。这题出的不太严谨，其实应该考虑钱没法正常买怎么办。
+正常买的情况下 由于本题最大时间复杂度大概是小于O(n^2) 9999^2的话不会超时 所以可以暴力考虑所有情况，然后将有用的值存下，进行一个最小值min的比较。
+
+import java.util.*;
+
+public class Kyopro_016 {
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        long N = input.nextLong();
+        long[] A = new long[3];
+        for(int i = 0; i < 3; i++){
+            A[i] = input.nextLong();
+        }
+
+        Arrays.sort(A);
+        long min = 10000;
+
+        for(long i = 0; i <= 9999; i++){
+            for(long j = 0; j + i <= 9999; j++){
+                long m = (N - A[2]*i - A[1]*j);
+                if(m < 0) break;
+                if(m % A[0] == 0){
+                    long k = m / A[0];
+                    min = Math.min(min, (k + i + j));
+                }
+            }
+        }
+        System.out.println(min);
+    }
+}
+
