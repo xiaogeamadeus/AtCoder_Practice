@@ -1,0 +1,27 @@
+log2a<b(log2c) ですか？
+
+-------------------------
+关键点在于a的范围是9*10^18
+然后c的b次最大是13^17
+这种题不要考虑任何可能会用到double/float的办法 比如Math.pow
+原因很简单 题目上没有说让你考虑误差 那用整数做是最稳妥的。其他方法都容易导致误差。
+
+
+
+import java.util.*;
+
+public class Kyopro_020 {
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        long a = input.nextLong();
+        long b = input.nextLong();
+        long c = input.nextLong();
+
+        long bLogc = c;
+        for(int i = 1; i < b; i++){
+            bLogc *= c;
+        }
+        if(bLogc > a) System.out.println("Yes");
+        else System.out.println("No");
+    }
+}
