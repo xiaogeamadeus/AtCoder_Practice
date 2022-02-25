@@ -1,0 +1,39 @@
+平面 x=0 上に、高さ L の T 分で一周する観覧車があります。 観覧車は円形になっており、次のように一定の速さで動きます。 ただし、xy 平面が水平方向、z 軸が垂直方向です。
+乗ってから 0 分後には、座標 (0,0,0) にある
+乗ってから T/4 分後には、座標 (0, −2L , 2L) にある乗ってから T/2 分後には、座標 (0,0,L) にある乗ってから  3T/4 分後には、座標 (0, 2L, 2L) にある
+観覧車の名物である「高橋直大像」は、座標 (X,Y,0) に存在します。 以下の形式の質問が Q 個与えられるので、順に答えてください。
+i 個目の質問では、E869120 君が観覧車に乗ってから Ei 分後における、E869120 君から見た高橋直大像の俯角を求めよ。
+
+-------------------------------
+思路：纯数学题 直接数学计算就行了 关键在于怎样保留小数点后多位。
+
+
+import java.util.*;
+
+public class Kyopro_018 {
+    public static void main(String[] args){
+        Scanner input  = new Scanner(System.in);
+        long T = input.nextLong();
+        long L = input.nextLong();
+        long X = input.nextLong();
+        long Y = input.nextLong();
+        int Q = input.nextInt();
+        long[] E = new long[Q];
+        for(int i = 0; i < Q; i++){
+            E[i] = input.nextLong();
+        }
+        input.close();
+
+        for(int i = 0; i < Q; i++){
+            double theta = 2 * Math.PI * E[i] / T;
+            double yi = (-L * 0.5) * Math.sin(theta);
+            double zi = L * 0.5 - L * 0.5 * Math.cos(theta);
+            double alpha = Math.atan2(zi, Math.sqrt(X * X + (Y - yi) * (Y - yi)));
+            System.out.println(alpha * 180 / Math.PI);
+        }
+    }
+}
+
+注意 Math.PI / Math.atan / Math.atan2的用法。
+atan后面是斜率 前面是角度（弧度制）
+atan2后面是x，y两个点的坐标差 前面也是角度（弧度制）
