@@ -1,0 +1,38 @@
+低橋くんはプログラミングコンテストサイト「LowCoder」を作り、サービスを開始しました。
+今日の時点では、LowCoder にはユーザはいません。
+
+今日から数えて i (1≤i≤N) 日後には、ユーザ名 Si を希望するユーザが登録申請を行います。
+申請を行った時点でユーザ名が Si であるユーザが存在する場合、その登録申請は無視されます。
+そのようなユーザが存在しない場合は登録申請が受理され、LowCoder にそのユーザが登録されます。
+
+何日目の登録申請が受理されるかを求めてください。
+---------------------------------------------------
+注意字符串的输入方法
+用哈希点集就行 很简单
+
+
+import java.util.*;
+
+public class Kyopro_027 {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int N = input.nextInt();
+        String[] A = new String[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = input.next();
+        }
+
+        int count = 1;
+        HashSet<String> hash = new HashSet<String>();
+        for (int i = 0; i < N; i++) {
+            if (!hash.contains(A[i])) {
+                hash.add(A[i]);
+                System.out.println(count);
+            }
+            count++;
+        }
+
+    }
+}
+
+
