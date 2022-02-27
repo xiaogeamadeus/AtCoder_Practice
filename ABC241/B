@@ -1,0 +1,42 @@
+There is pasta consisting of N noodles at Takahashi's home. The length of the i-th noodle is Ai Takahashi has a meal plan for the next M days. 
+On the i-th day, he is going to choose a pasta noodle of length exactly Bi and eat it. If no such noodle is available on any day, his plan fails. 
+Additionally, he cannot eat the same noodle on multiple days.
+
+Can Takahashi accomplish his meal plan?
+
+
+
+--------------------------------------------------------
+
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        int N = input.nextInt();
+        int M = input.nextInt();
+        int[] A = new int[N];
+        int[] B = new int[M];
+        for(int i = 0; i < N; i++){
+            A[i] = input.nextInt();
+        }
+        for(int i = 0; i < M; i++){
+            B[i] = input.nextInt();
+        }
+        ArrayList<Integer> noodles = new ArrayList<>(N+1);
+        for(int i = 0; i < N; i++){
+            noodles.add(A[i]);
+        }
+ 
+        int count = 0;
+        for(int i = 0; i < M; i++){
+            if(noodles.contains(B[i])){
+                int c =noodles.indexOf(B[i]);
+                noodles.remove(c);
+                count++;
+            }
+            else break;
+        }
+        if(count == M) System.out.println("Yes");
+        else System.out.println("No");
+    }
+}
