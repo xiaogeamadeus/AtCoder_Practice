@@ -1,0 +1,17 @@
+There is a device with a screen that shows a single-digit number, and a button.
+
+When the screen is showing a number k, pressing the button once changes the number on the screen to ak
+The device currently shows 0. After pressing the button 3 times, what will be shown on the screen?
+
+-----------------------------------------------
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        int[] A = new int[10];
+        for(int i = 0; i < 10; i++){
+            A[i] = input.nextInt();
+        }
+        System.out.println(A[A[A[0]]]);
+    }
+}
