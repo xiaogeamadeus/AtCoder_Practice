@@ -1,0 +1,47 @@
+Given is a string S consisting of lowercase English letters. 
+Determine whether adding some number of a's (possibly zero) at the beginning of S can make it a palindrome.
+
+Here, a string of length N, A=A1 A2…AN, is said to be a palindrome when Ai = A N+1−i for every 1 ≤ i ≤ N.
+----------------------------------------------------
+第一遍 TLE的代码。
+大概是因为isPalindrome函数放到for循环里会10^6 * 10^6
+超时
+实际上我没必要每删一个a就测一次
+我把a删到头 测一次就行了
+
+
+
+import java.util.*;
+ 
+public class Main {
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        String S = input.next();
+        StringBuffer sb = new StringBuffer();
+        sb.append(S);
+        int lastIndex;
+        while(!S.isEmpty()){
+            if(isPalindrome(S)){
+                System.out.println("Yes");
+                break;
+            }
+            lastIndex = S.lastIndexOf('a');
+            if(lastIndex != S.length() - 1){
+                System.out.println("No");
+                break;
+            }
+            else{
+                sb.delete(S.length() - 1, S.length());
+                S = sb.toString();
+            }
+        }
+    }
+    public static boolean isPalindrome(String S){
+        if(S.isEmpty()) return true;
+        int N = S.length();
+        for(int i = 0; i < N/2; i++){
+            if(S.charAt(i) != S.charAt(N - 1 - i)) return false;
+        }
+        return true;
+    }
+}
