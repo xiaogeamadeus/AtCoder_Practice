@@ -9,7 +9,7 @@ Here, a string of length N, A=A1 A2…AN, is said to be a palindrome when Ai = A
 实际上我没必要每删一个a就测一次
 我把a删到头 测一次就行了
 
-
+除此之外S.lastIndexOf每次都要遍历一次，也会TLE
 
 import java.util.*;
  
@@ -33,6 +33,92 @@ public class Main {
             else{
                 sb.delete(S.length() - 1, S.length());
                 S = sb.toString();
+            }
+        }
+    }
+    public static boolean isPalindrome(String S){
+        if(S.isEmpty()) return true;
+        int N = S.length();
+        for(int i = 0; i < N/2; i++){
+            if(S.charAt(i) != S.charAt(N - 1 - i)) return false;
+        }
+        return true;
+    }
+}
+
+于是我为啥要删除 直接指针不就好了 指针完找字字符串
+思路二 双指针
+
+
+出现了低级失误 某个循环里if后面少了else
+导致有一个wa
+改了之后获得了第一个通过的答案
+思路大概就是先前后一起走 直到前后不是都是a的情况 开始走后面 直到走到后面不是a 进行判断
+
+
+import java.util.*;
+public class Main {
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        String S = input.next();
+        int lo = 0, hi = S.length() - 1;
+        while(lo < hi){
+            if(S.charAt(lo) == 'a' && S.charAt(hi) == 'a') {
+                lo++;
+                hi--;
+            }
+          else{
+            if(S.charAt(hi) == 'a') hi--;
+            else break;
+          }
+        }
+        String subS = S.substring(lo, hi+1);
+ 
+        if(isPalindrome(subS)) System.out.println("Yes");
+        else System.out.println("No");
+    }
+    public static boolean isPalindrome(String S){
+        if(S.isEmpty()) return true;
+        int N = S.length();
+        for(int i = 0; i < N/2; i++){
+            if(S.charAt(i) != S.charAt(N - 1 - i)) return false;
+        }
+        return true;
+    }
+}
+
+
+思路三 不用指针 直接计数
+用一个begin 一个last计前面有几个a 后面有几个a
+然后 前面大于后面 直接no
+后面大于/等于前面 子字符串判断
+开局用一个if判断初始 用来过aaaaaaaaa 的case。
+
+
+import java.util.*;
+public class Main {
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        String S = input.next();
+        if(isPalindrome(S)) System.out.println("Yes");
+        else {
+            int sBegin = 0, sLast = 0;
+            for (int i = 0; i < S.length(); i++) {
+                if (S.charAt(i) == 'a')
+                    sBegin++;
+                else break;
+            }
+            for (int i = S.length() - 1; i > -1; i--) {
+                if (S.charAt(i) == 'a')
+                    sLast++;
+                else break;
+            }
+            if (sBegin > sLast) {
+                System.out.println("No");
+            } else {
+                if (isPalindrome(S.substring(sBegin, S.length() - sLast))) {
+                    System.out.println("Yes");
+                } else System.out.println("No");
             }
         }
     }
