@@ -1,0 +1,57 @@
+Takahashi and Aoki are playing a game.
+
+First, Takahashi chooses an integer between A and B (inclusive) and tells it to Aoki.
+Next, Aoki chooses an integer between C and D (inclusive).
+If the sum of these two integers is a prime, then Aoki wins; otherwise, Takahashi wins.
+When the two players play optimally, which player will win?
+-----------------------------------------------------------------
+
+遍历
+最优策略就是把所有的数遍历一遍 找一个看看遍历另一边能不能有和为质数。
+质数提前做成list 用一个静态方法构建出来
+就行了
+import java.util.*;
+
+public class ABC239_D {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int A = input.nextInt();
+        int B = input.nextInt();
+        int C = input.nextInt();
+        int D = input.nextInt();
+
+        int judge1 = 0;
+        boolean pref = true;
+        for (int ta = A; ta < B + 1; ta++) {
+            pref = true;
+            for (int ao = C; ao < D + 1; ao++) {
+                if (isPrime(B + D).contains(ta + ao)) {
+                    pref = false;
+                    break;
+                }
+            }
+            if (pref) {
+                judge1 = 1;
+                break;
+            }
+        }
+        if (judge1 == 1) System.out.println("Takahashi");
+        else System.out.println("Aoki");
+    }
+    public static ArrayList isPrime (int hi){
+
+        ArrayList<Integer> a = new ArrayList<Integer>();
+        for(int i = 2; i < hi + 1; i++) {
+            boolean pref = true;
+            for (int j = 2; j < i; j++) {
+                if(i % j == 0) {
+                    pref = false;
+                    break;
+                }
+            }
+            if(pref)  a.add(i);
+        }
+        return a;
+    }
+
+}
