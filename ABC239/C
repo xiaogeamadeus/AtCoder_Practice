@@ -1,0 +1,30 @@
+On an xy-coordinate plane, is there a lattice point whose distances from two lattice points (x1,y1) and (x2,y2) are both 5 ^ 1/2?
+
+---------------------------------------------------------------------
+import java.util.*;
+
+public class ABC239_C {
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        int x1 = input.nextInt();
+        int y1 = input.nextInt();
+        int x2 = input.nextInt();
+        int y2 = input.nextInt();
+
+        boolean torf = false;
+        for(int x = x1-2; x < x1 + 3; x++){
+            for(int y = y1 - 2; y < y1 + 3; y++ ){
+                if((x2 - x) * (x2 - x) + (y2 - y) * (y2 - y) == 5 && (x1 - x) * (x1 - x) + (y1 - y) * (y1 - y) == 5) {
+                    torf = true;
+                    break;
+                }
+                }
+            if(torf) break;
+            }
+        if(torf) System.out.println("Yes");
+        else System.out.println("No");
+        }
+
+    }
+    
+暴力即可，满足条件的点很少。
