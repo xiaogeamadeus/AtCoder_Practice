@@ -1,0 +1,40 @@
+There are N stations on a certain line operated by AtCoder Railway. 
+The i-th station (1≤i≤N) from the starting station is named Si Local trains stop at all stations, while express trains may not. 
+Specifically, express trains stop at only M(M≤N) stations, and the j-th stop (1≤j≤M) is the station named Tj.
+Here, it is guaranteed that T1=S1and TM=SN, that is, express trains stop at both starting and terminal stations.
+
+For each of the N stations, determine whether express trains stop at that station.
+---------------------------------------------------------------
+
+过于简单的C
+
+import java.util.*;
+
+public class ABC236_C {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        String[] S = new String[N];
+        String[] T = new String[M];
+        for(int i = 0; i < N; i++){
+            S[i] = sc.next();
+        }
+        for(int i = 0; i < M; i++){
+            T[i] = sc.next();
+        }
+
+        int p1 = 0 ,p2 = 0;
+        while(p1 != S.length){
+            if(S[p1].compareTo(T[p2]) == 0) {
+                p1++;
+                p2++;
+                System.out.println("Yes");
+            }
+            else {
+                p1++;
+                System.out.println("No");
+            }
+        }
+    }
+}
