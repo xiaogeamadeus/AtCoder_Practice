@@ -1,0 +1,37 @@
+Among the positive integers that consist of 0's and 2's when written in base 10, find the K-th smallest integer.
+
+K is an integer between 1 and 10^18(inclusive).
+----------------------------------------------
+大数到最后肯定大于10^18 上来就用字符串就好了。
+
+方法1 10进制2进制转换 然后把所有的1*2 然后把字符串反向就可以了。 
+import java.util.*;
+public class ABC234_C {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        long K = sc.nextLong();
+        String res = "";
+
+        while (K > 0){
+            res += (K % 2) * 2;
+            K = K / 2;
+        }
+        StringBuffer sb = new StringBuffer(res);
+        sb.reverse();
+        System.out.println(sb);
+    }
+}
+
+方法2 原理一样 toBinaryString 是转换成二进制的字符串 然后把1换成2
+思路不变的。
+
+import java.util.*;
+ 
+public class Main {
+  public static void main(String[]args){
+    Scanner sc=new Scanner(System.in);
+    long k=sc.nextLong();
+    String str=Long.toBinaryString(k);
+    System.out.println(str.replace("1","2"));
+  }
+}
