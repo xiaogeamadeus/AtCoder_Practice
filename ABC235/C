@@ -1,0 +1,40 @@
+We have a sequence of N numbers: A=(a1,a2,…,aN ).
+Process the Q queries explained below.
+
+Query i: You are given a pair of integers (xi,ki ). 
+Let us look at the elements of A one by one from the beginning: a1 ,a2 ,… Which element will be the ki -th occurrence of the number xi ?
+Print the index of that element, or −1 if there is no such element.
+-----------------------------------------------------
+很好的代码，把输入和判断放到了一起 非常简洁。
+实际上并不是每次都要把输入弄成数组，直接在数组下面判断也不错。
+不过这个代码时间复杂度不是很理想 应该还能提速 问题应该出在get？
+
+学到的第二点，我们可以把ArrayList作为hashmap的value存在 然后把那个arraylist所对应的值作为键值。
+操作可以用get.get
+get.add之类的
+
+import java.util.*;
+
+public class ABC235C {
+    public static void main(String[] args){
+        Scanner sc =new Scanner(System.in);
+        int N = sc.nextInt();
+        int Q = sc.nextInt();
+        HashMap<Integer, ArrayList<Integer>> sHash= new HashMap<Integer, ArrayList<Integer>>();
+        for(int i = 0; i < N; i++){
+            int a = sc.nextInt();
+            if(sHash.containsKey(a) == false){
+                sHash.put(a, new ArrayList<Integer>());
+            }
+            sHash.get(a).add(i+1);
+        }
+        for(int i = 0; i < Q; i++){
+            int x = sc.nextInt();
+            int k = sc.nextInt();
+            if(sHash.containsKey(x) == true && k <= sHash.get(x).size()){
+                System.out.println(sHash.get(x).get(k-1));
+            }
+            else System.out.println(-1);
+        }
+    }
+}
