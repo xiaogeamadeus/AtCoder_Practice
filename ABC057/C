@@ -1,0 +1,31 @@
+You are given an integer N.
+For two positive integers A and B, we will define F(A,B) as the larger of the following: 
+the number of digits in the decimal notation of A, and the number of digits in the decimal notation of B.
+
+For example, F(3,11)=2 since 3 has one digit and 11 has two digits.
+Find the minimum value of F(A,B) as (A,B) ranges over all pairs of positive integers such that N=A×B.
+--------------------------------------------------------------------
+首先一看n的位数是10^0就知道不能暴力，要想办法降低时间复杂度。实际上作为一个乘积为大数的题目 我们只要控制i^2小于n就可以了。原因很简单i^2是最大的。
+这样时间复杂度被削减到10^5左右 不会TLE
+
+import java.util.*;
+
+public class ABC057C {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        long N = sc.nextLong();
+
+        long res = Long.MAX_VALUE;
+        for(long i = 1;i * i <= N; i++){
+            if(N % i == 0){
+                res = Math.min(Math.max(N/i, i), res);
+            }
+        }
+        int digits = 0;
+        while(res != 0){
+            res = res / 10;
+            digits++;
+        }
+        System.out.println(digits);
+    }
+}
