@@ -1,0 +1,32 @@
+
+You are given a string S consisting of uppercase English letters. Find the length of the longest ACGT string that is a substring (see Notes) of S.
+
+Here, a ACGT string is a string that contains no characters other than A, C, G and T.
+------------------------------------------------------------------------------
+
+把字符串用""分割成一个字符串数组，这样就可以用for循环遍历了。
+注意else的使用，else里面不能进行判断比大小，比大小应当放在外面。
+看看还有没有其他算法
+
+
+
+import java.util.*;
+
+public class test{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        String[] S = sc.next().split("");
+        int sum = 0;
+        int max = 0;
+        for(int i = 0; i < S.length; i++){
+            if(S[i].equals("A")||S[i].equals("T")||S[i].equals("C")||S[i].equals("G")){
+                sum++;
+            }
+            else{
+                sum = 0;
+            }
+            max = Math.max(sum, max);
+        }
+        System.out.println(max);
+    }
+}
