@@ -30,3 +30,38 @@ public class test{
         System.out.println(max);
     }
 }
+
+
+我之前的想法 双循环 一个i-i+1，一个i+1-n，计数 也可以
+import java.util.*;
+ 
+public class Main {
+ 
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String S = sc.next();
+        // String S = "ATCODER";
+        int n = S.length();
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (S.substring(i, i+1).equals("A") | S.substring(i, i+1).equals("C") | S.substring(i, i+1).equals("G") | S.substring(i, i+1).equals("T")) {
+                int temp = 1;
+                // System.out.println("i: " + S.substring(i, i+1));
+                for (int j = i+1; j < n; j++) {
+                    if (S.substring(j, j+1).equals("A") | S.substring(j, j+1).equals("C") | S.substring(j, j+1).equals("G") | S.substring(j, j+1).equals("T")) {
+                        // System.out.println("j: " + S.substring(j, j+1));
+                        temp++;
+                    } else {
+                        break;
+                    }
+                }
+                if (temp > ans) {
+                    ans = temp;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+ 
+}
+时间复杂度高一些。
