@@ -1,0 +1,36 @@
+"Pizza At", a fast food chain, offers three kinds of pizza: "A-pizza", "B-pizza" and "AB-pizza".
+A-pizza and B-pizza are completely different pizzas, and AB-pizza is one half of A-pizza and one half of B-pizza combined together. 
+The prices of one A-pizza, B-pizza and AB-pizza are A yen, B yen and C yen (yen is the currency of Japan), respectively.
+
+Nakahashi needs to prepare X A-pizzas and Y B-pizzas for a party tonight. 
+He can only obtain these pizzas by directly buying A-pizzas and B-pizzas, or buying two AB-pizzas and then rearrange them into one A-pizza and one B-pizza. 
+At least how much money does he need for this? It is fine to have more pizzas than necessary by rearranging pizzas.
+-------------------------------------------------------------------
+
+直接进行遍历，似乎没有感觉到我有刻意去减少运算次数。 看了一下数据 我的最坏时间复杂度大概是10^5/2左右，貌似没啥问题。
+
+import java.util.Scanner;
+public class ABC095C {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int A = sc.nextInt();
+        int B = sc.nextInt();
+        int C = sc.nextInt();
+        int X = sc.nextInt();
+        int Y = sc.nextInt();
+
+        //i the number of AB-pizza
+        int sum = Integer.MAX_VALUE;
+        for(int i = 0; i <= 2 * Math.max(X,Y) + 1; i+=2){
+            int prep;
+            int numA = X - i/2;
+            int numB = Y - i/2;
+            if(numA < 0) numA = 0;
+            if(numB < 0) numB =0;
+            prep = C * i + A * numA + B * numB;
+            sum = Math.min(sum, prep);
+        }
+        System.out.println(sum);
+    }
+}
+
